@@ -1,0 +1,84 @@
+{% extends "dashboard_base_layout.html" %}
+
+{% block content %}
+    <div class="content" id="content">
+        <h1 class="dashboard-title">Dashboard Overview 📊</h1>
+        <p class="text-secondary mb-4">Welcome back, *User Name*</p>
+
+        <div class="row g-3">
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-card-total">
+                    <div class="stat-text">
+                        <div class="stat-title">TOTAL MEMBERS</div>
+                        <div class="stat-value">1,234</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-card-wallet">
+                    <div class="stat-text">
+                        <div class="stat-title">WALLET BALANCE</div>
+                        <div class="stat-value">$500.00</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-wallet"></i></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-card-pending">
+                    <div class="stat-text">
+                        <div class="stat-title">PENDING WITHDRAWAL</div>
+                        <div class="stat-value">45</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="stat-card stat-card-today">
+                    <div class="stat-text">
+                        <div class="stat-title">NEW TODAY</div>
+                        <div class="stat-value">8</div>
+                    </div>
+                    <div class="stat-icon"><i class="fas fa-user-plus"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 g-3 d-flex">
+            <div class="col-lg-8 d-flex">
+                <div class="card-panel">
+                    <div class="table-title">Recent Transactions</div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Amount</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>#00101</td><td>Deposit</td><td class="text-success">$50.00</td><td>2025-09-25</td><td><span class="table-status-completed">Completed</span></td></tr>
+                                <tr><td>#00102</td><td>Withdrawal</td><td class="text-danger">$20.00</td><td>2025-09-24</td><td><span class="table-status-pending">Pending</span></td></tr>
+                                <tr><td>#00103</td><td>Referral</td><td class="text-success">$5.00</td><td>2025-09-23</td><td><span class="table-status-credited">Credited</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="#" class="d-block mt-3 text-primary">View All Transactions &rarr;</a>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 d-flex">
+                <div class="card-panel quick-actions-card">
+                    <div class="table-title">Quick Actions</div>
+                    <div class="mt-auto pt-2"> <button class="btn btn-primary w-100 mb-3 py-2"><i class="fas fa-user-check me-2"></i> Activate New Member</button>
+                        <button class="btn btn-outline-success w-100 mb-3 py-2"><i class="fas fa-hand-holding-usd me-2"></i> Request Withdrawal</button>
+                        <button class="btn btn-outline-secondary w-100 py-2"><i class="fas fa-user-edit me-2"></i> Update Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

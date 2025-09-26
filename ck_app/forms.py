@@ -36,13 +36,13 @@ class MemberRegistrationForm(forms.ModelForm):
             choices=[('', 'Select')] + [(data.name, data.name) for data in CityModel.objects.filter(status=1)],
             attrs={'class': 'form-control'}
         )
-        self.fields['user_type'].widget = forms.Select(attrs={'class': 'form-control','placeholder': 'Enter your area','required':'required'},choices=[ (' ', 'Select'),
-        ('Individual', 'Individual'),
-        ('Organisation', 'Organisation'),])
+        # self.fields['user_type'].widget = forms.Select(attrs={'class': 'form-control','placeholder': 'Enter your area','required':'required'},choices=[ (' ', 'Select'),
+        # ('Individual', 'Individual'),
+        # ('Organisation', 'Organisation'),])
         self.fields['address'].widget = forms.Textarea(attrs={'class': 'form-control','rows':2})
-        self.fields['mode_of_payment'].widget = forms.Select(attrs={'class': 'form-control','placeholder': 'Enter your area','required':'required'},choices=[ (' ', 'Select'),
-        ('Offline', 'Offline'),
-        ('Online', 'Online'),])
+        # self.fields['mode_of_payment'].widget = forms.Select(attrs={'class': 'form-control','placeholder': 'Enter your area','required':'required'},choices=[ (' ', 'Select'),
+        # ('Offline', 'Offline'),
+        # ('Online', 'Online'),])
 
         self.fields = OrderedDict([
     ('senior_ID', self.fields['senior_ID']),
@@ -51,13 +51,14 @@ class MemberRegistrationForm(forms.ModelForm):
     ('email', self.fields['email']),
     ('phone_number', self.fields['phone_number']),
     ('address', self.fields['address']),
-    ('user_type', self.fields['user_type']),
-    ('password', self.fields['password']),
-    ('password1', self.fields['password1']),
+    # ('user_type', self.fields['user_type']),
+
     ('state', self.fields['state']),
     ('city', self.fields['city']),
     ('pincode', self.fields['pincode']),
-    ('mode_of_payment', self.fields['mode_of_payment']),
+    # ('mode_of_payment', self.fields['mode_of_payment']),
+    ('password', self.fields['password']),
+    ('password1', self.fields['password1']),
     # ('registration_fee', self.fields['registration_fee']),
 ])
     

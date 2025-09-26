@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            pointer-events: none;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: #FFF176;
+        }
+
+        .app-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .app-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.5;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .feature-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .right-panel {
+            flex: 1;
+            background: white;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px;
+        }
+
+        .login-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .welcome-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2E7D32;
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            color: #4CAF50;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+
+        .form-label {
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-label i {
+            width: 16px;
+            color: #4CAF50;
+        }
+
+        .form-control {
+            border: 2px solid #E8F5E8;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+
+        .form-control:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.15);
+            background: white;
+        }
+
+        .form-control::placeholder {
+            color: #A5D6A7;
+        }
+
+        .password-field {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .form-check {
+            margin-bottom: 20px;
+        }
+
+        .form-check-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 0.9rem;
+            float: right;
+        }
+
+        .forgot-password:hover {
+            color: #2E7D32;
+        }
+
+        .btn-signin {
+            background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .quick-access-title {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .quick-access-title::before,
+        .quick-access-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #E8F5E8;
+        }
+
+        .quick-access-title::before {
+            left: 0;
+        }
+
+        .quick-access-title::after {
+            right: 0;
+        }
+
+        .quick-access {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .quick-btn {
+            text-align: center;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            color: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        .quick-btn i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        .help-section {
+            background: #F1F8E9;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #E8F5E8;
+        }
+
+        .help-title {
+            color: #4CAF50;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .help-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .help-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .help-link {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .help-link:hover {
+            color: #2E7D32;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-panel {
+                min-height: 40vh;
+                padding: 30px 20px;
+            }
+
+            .right-panel {
+                padding: 30px 20px;
+                max-width: none;
+            }
+
+            .app-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <div class="logo-circle">
+                <i class="fas fa-seedling logo-icon"></i>
+            </div>
+
+            <h1 class="app-title">FarmConnect</h1>
+            <p class="app-subtitle">Good afternoon! Time to check your crops and market updates.</p>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="feature-title">Crop Analytics</div>
+                <div class="feature-description">Smart insights for better yield</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <div class="feature-title">Weather Updates</div>
+                <div class="feature-description">Real-time weather forecasting</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="feature-title">Market Prices</div>
+                <div class="feature-description">Live commodity pricing</div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <div class="feature-title">Equipment Rental</div>
+                <div class="feature-description">Modern farming equipment</div>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <div class="login-icon">
+                <i class="fas fa-seedling"></i>
+            </div>
+
+            <h2 class="welcome-title">Welcome Back</h2>
+            <p class="welcome-subtitle">Sign in to your farming dashboard</p>
+
+            <form method="POST" >
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-envelope"></i>
+                        Email or Phone
+                    </label>
+                    <input type="text" class="form-control" name="username" placeholder="Enter your email or mobile number">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        <i class="fas fa-lock"></i>
+                        Password
+                    </label>
+                    <div class="password-field">
+                        <input type="password" name="password" class="form-control" placeholder="Enter your password" id="password">
+                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                            <i class="fas fa-eye" id="eyeIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">
+                            Remember me
+                        </label>
+                    </div>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-signin text-white w-100">Sign In To Dashboard</button>
+            </form>
+
+            <div class="quick-access-title">Quick Access</div>
+            
+            <div class="quick-access">
+                <a href="#" class="quick-btn">
+                    <i class="fas fa-cloud-sun"></i>
+                    Weather Info
+                </a>
+                <a href="#" class="quick-btn">
+                    <i class="fas fa-chart-line"></i>
+                    Market Rates
+                </a>
+            </div>
+
+            <div class="help-section">
+                <div class="help-title">
+                    <i class="fas fa-question-circle"></i>
+                    Need Help?
+                </div>
+                <div class="help-description">Our agricultural experts are here to assist you</div>
+                <div class="help-links">
+                    <a href="#" class="help-link">Contact Support</a>
+                    <span>|</span>
+                    <a href="{% url 'register' %}" class="help-link">New Farmer? Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

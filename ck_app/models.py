@@ -90,7 +90,7 @@ class MemberModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)  # Automatically update on save
     status = models.IntegerField(default=1)
     rank    = models.CharField(max_length=50)
-    registration_fee =models.DecimalField( max_digits=6, decimal_places=2)
+    registration_fee =models.DecimalField( max_digits=10, decimal_places=2)
     is_active = models.BooleanField(default=True)
     joining_date= models.DateField( auto_now=True)
     mode_of_payment = models.CharField(max_length=50, choices=[('Offline', 'Offline'), ('Online', 'Online')],null=True,blank=True)
