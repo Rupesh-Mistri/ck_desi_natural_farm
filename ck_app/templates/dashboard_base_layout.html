@@ -190,6 +190,7 @@
         .table-status-pending { background-color: #ffc107; color: #343a40; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; }
         .table-status-credited { background-color: #17a2b8; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; }
     </style>
+    {% block head_part %}{% endblock head_part %}
 </head>
 <body id="body">
 
@@ -202,14 +203,14 @@
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> <span class="menu-item-text">Dashboard</span></a></li>
+            <li><a href="{% url "dashboard" %}" class="active"><i class="fas fa-tachometer-alt"></i> <span class="menu-item-text">Dashboard</span></a></li>
             
             {% comment %} <div class="menu-separator">Superuser Only</div> {% endcomment %}
             <li><a href="#"><i class="fas fa-wallet"></i> <span class="menu-item-text">Wallet</span></a></li>
             
             <li><a href="#"><i class="fas fa-user-check"></i> <span class="menu-item-text">Activate Member</span></a></li>
             <li><a href="#"><i class="fas fa-user-circle"></i> <span class="menu-item-text">Profile</span></a></li>
-            <li><a href="#"><i class="fas fa-chart-bar"></i> <span class="menu-item-text">Level Data</span></a></li>
+            <li><a href="/level_data"><i class="fas fa-chart-bar"></i> <span class="menu-item-text">Level Data</span></a></li>
             <li><a href="#"><i class="fas fa-money-check-alt"></i> <span class="menu-item-text">Withdrawal</span></a></li>
             <li><a href="#"><i class="fas fa-receipt"></i> <span class="menu-item-text">Slips List</span></a></li>
             
@@ -236,7 +237,7 @@
                 </li>
                 <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
+                <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Sign out</a></li>
             </ul>
         </div>
     </nav>

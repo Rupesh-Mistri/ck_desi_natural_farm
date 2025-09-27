@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('cascade_ajax/', cascade_ajax, name='cascade_ajax'),
     path('get_sponser_name_ajax/', get_sponser_name_ajax, name='get_sponser_name_ajax'),
+    path('level_data/', level_data, name='level_data'),
 ]

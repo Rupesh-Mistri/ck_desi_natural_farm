@@ -4,6 +4,8 @@ from .forms import *
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.http import JsonResponse
+from .utilities import login_req
+import json
 # Create your views here.
 def login_view(request):
     if request.method == 'POST':
@@ -103,6 +105,7 @@ def register_view(request):
 def index(request):
     return render(request,'index.html')
 
+@login_req
 def dashboard(request):
     return render(request,'dashboard.html',{})
 
@@ -149,6 +152,55 @@ def get_sponser_name_ajax(request):
         #    print(data)
            return JsonResponse(data, safe=False) 
     return JsonResponse([],safe=False)
+
+
+@login_req
+def level_data(request):
+    user=request.user
+    user_id=user.id
+    tree= build_tree(user_id)
+    # print(tree)
+    return render(request,'level_data.html',{'tree':json.dumps(tree)})
+
+def build_tree(id):
+    user=CustomUser.objects.filter(id=id).first()
+    member = MemberModel.objects.filter(id=id).first()
+    if not member:
+        return None
+
+    # Query for children where the current member is the sponsor
+    children = MemberModel.objects.filter(sponser_member_id=member.id)
+    tree = {
+        'member': {'name':member.applicant_name,'memberID':user.memberID,'rank':member.rank,'is_active':member.is_active},
+        'children': []
+    }
+
+    # Recursively build the tree for each child
+    for child in children:
+        subtree = build_tree(child.id)
+        if subtree:
+            tree['children'].append(subtree)
+
+    return tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def build_tree(level=1, max_level=13, left_unit=1, right_unit=1):
 #     if level > max_level:
